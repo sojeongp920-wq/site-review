@@ -36,7 +36,7 @@ if (url.pathname === "/api/address-search") {
     `&key=${VWORLD_API_KEY}`;
 
   fetch(apiUrl)
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
       res.writeHead(200, {
         "Content-Type": "application/json; charset=utf-8"
