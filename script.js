@@ -525,3 +525,25 @@ addressSearchBtn.addEventListener("click", () => {
     ※ 용도지역을 선택하면 기본 건폐율·용적률이 자동 반영됩니다.
   `;
 });
+const zoningSelect = document.getElementById("zoning");
+const coverageRatioInput = document.getElementById("coverageRatio");
+const legalFarInput = document.getElementById("legalFar");
+
+const zoningStandards = {
+  "제1종일반주거지역": { coverage: 60, far: 150 },
+  "제2종일반주거지역": { coverage: 60, far: 200 },
+  "제3종일반주거지역": { coverage: 50, far: 250 },
+  "준주거지역": { coverage: 60, far: 400 },
+  "일반상업지역": { coverage: 60, far: 800 },
+  "근린상업지역": { coverage: 60, far: 600 },
+  "일반공업지역": { coverage: 60, far: 200 }
+};
+
+zoningSelect.addEventListener("change", () => {
+  const standard = zoningStandards[zoningSelect.value];
+
+  if (standard) {
+    coverageRatioInput.value = standard.coverage;
+    legalFarInput.value = standard.far;
+  }
+});
