@@ -510,7 +510,7 @@ document.getElementById("resultComment").textContent =
 });
 const addressSearchBtn = document.getElementById("addressSearchBtn");
 
-addressSearchBtn.addEventListener("click", async () => {
+addressSearchBtn.addEventListener("click", () => {
   const address = document.getElementById("address").value;
   const result = document.getElementById("addressSearchResult");
 
@@ -519,37 +519,9 @@ addressSearchBtn.addEventListener("click", async () => {
     return;
   }
 
-  result.textContent = "주소 조회 중...";
-
-  try {
-    const response = await fetch(
-      `/api/address-search?query=${encodeURIComponent(address)}`
-    );
-
-    const data = await response.json();
-
-    const items = data?.response?.result?.items;
-
-    if (!items || items.length === 0) {
-      result.textContent = "검색 결과가 없습니다.";
-      return;
-    }
-
-    const first = items[0];
-
-    const title = first.title || address;
-    const x = first.point?.x || "-";
-    const y = first.point?.y || "-";
-
-    result.innerHTML = `
-      <strong>주소 조회 성공</strong><br>
-      주소: ${title}<br>
-      X 좌표: ${x}<br>
-      Y 좌표: ${y}
-    `;
-
-  } catch (error) {
-    console.error(error);
-    result.textContent = "주소 조회 중 오류가 발생했습니다.";
-  }
+  result.innerHTML = `
+    <strong>대상지 입력 완료</strong><br>
+    주소: ${address}<br>
+    ※ 용도지역을 선택하면 기본 건폐율·용적률이 자동 반영됩니다.
+  `;
 });
