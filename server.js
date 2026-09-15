@@ -36,7 +36,12 @@ if (url.pathname === "/api/address-search") {
     `&key=${VWORLD_API_KEY}`;
 
   fetch(apiUrl)
-    .then(response => response.text())
+    .then(async response => {
+  const text = await response.text();
+  console.log("VWorld 상태코드:", response.status);
+  console.log("VWorld 응답:", text);
+  return text;
+})
     .then(data => {
       res.writeHead(200, {
         "Content-Type": "application/json; charset=utf-8"
